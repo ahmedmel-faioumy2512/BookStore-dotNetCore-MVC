@@ -1,0 +1,114 @@
+﻿@model IEnumerable<BookStore1.Models.Books>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<br />
+@if (TempData["AlertMessage"] != null)
+{
+    <div class="alert alert-success">
+        <strong>Success !</strong>  @TempData["AlertMessage"]
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+            @*<span>X</span>*@
+        </button>
+    </div>
+}
+
+<p>
+    <a class="btn btn-info" asp-action="Create">Create New</a>
+</p>
+
+<br />
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/lib/Datatables/datatables.min.css">
+<br />
+
+<table id="ProTable" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Info)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookQuantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CataId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Info)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookQuantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <img src="~/images/@item.Image" style="width:35px; height:35px;" alt="Image">
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CataId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-warning" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+<script src="~/lib/Datatables/datatables.js"></script>
+<script src="~/lib/Datatables/Buttons-2.4.2/js/buttons.print.js"></script>
+<script src="~/lib/Datatables/Buttons-2.4.2/js/buttons.html5.js"></script>
+<script src="~/lib/Datatables/Buttons-2.4.2/js/buttons.bootstrap5.min.js"></script>
+<script src="~/lib/Datatables/Buttons-2.4.2/js/dataTables.buttons.js"></script>
+<script src="~/lib/Datatables/pdfmake-0.2.7/pdfmake.min.js"></script>
+<script src="~/lib/Datatables/pdfmake-0.2.7/vfs_fonts.js"></script>
+<script src="~/lib/Datatables/JSZip-3.10.1/jszip.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#ProTable').DataTable({
+            responsive: true,
+        });
+    });
+
+    new DataTable('#ProTable', {
+        dom: 'Bfrtip',
+        buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+    });
+</script>

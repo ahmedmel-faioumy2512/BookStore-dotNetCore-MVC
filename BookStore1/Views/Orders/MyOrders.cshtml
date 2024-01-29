@@ -1,0 +1,76 @@
+﻿@model IEnumerable<BookStore1.Models.Orders>
+
+@{
+    ViewData["Title"] = "MyOrders";
+}
+
+@{Layout = "~/Views/Shared/_Layout1.cshtml";}
+
+<h1>MyOrders</h1>
+
+<br />
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/lib/Datatables/datatables.min.css">
+<br />
+
+<table id="ProTable" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BookId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Orderdate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Orderdate)
+                </td>
+                <td>
+                    <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-warning" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a class="btn btn-danger"asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+<script src="~/lib/Datatables/datatables.js"></script>
+<script src="~/lib/Datatables/Buttons-2.4.2/js/buttons.print.js"></script>
+<script src="~/lib/Datatables/Buttons-2.4.2/js/buttons.html5.js"></script>
+<script src="~/lib/Datatables/Buttons-2.4.2/js/buttons.bootstrap5.min.js"></script>
+<script src="~/lib/Datatables/Buttons-2.4.2/js/dataTables.buttons.js"></script>
+<script src="~/lib/Datatables/pdfmake-0.2.7/pdfmake.min.js"></script>
+<script src="~/lib/Datatables/pdfmake-0.2.7/vfs_fonts.js"></script>
+<script src="~/lib/Datatables/JSZip-3.10.1/jszip.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#ProTable').DataTable({
+            responsive: true,
+        });
+    });
+
+    new DataTable('#ProTable', {
+        dom: 'Bfrtip',
+        buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+    });
+</script>

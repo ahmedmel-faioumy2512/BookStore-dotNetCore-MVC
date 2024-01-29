@@ -1,0 +1,83 @@
+﻿@model BookStore1.Models.Books
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<hr />
+<dl class="row">
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Id)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Id)
+    </dd>
+
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Title)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Title)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Info)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Info)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.BookQuantity)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.BookQuantity)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Price)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Price)
+    </dd>
+
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Author)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Author)
+    </dd>
+    <dt>
+        Pic
+    </dt>
+    <dd>
+        <img src="~/images/@Model.Image" height="150" />
+        <br />@Model.Image
+
+    </dd>
+</dl>
+
+
+<h4>Orders</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" name="bookId" value=@Model.Id />
+            
+            <div class="form-group">
+                <label class="control-label">Quantity</label>
+                <input name="quantity" class="form-control" />
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Buy" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-outline-dark" asp-controller="Books" asp-action="Catalogue">Back to Catalogue</a>
+</div>
+

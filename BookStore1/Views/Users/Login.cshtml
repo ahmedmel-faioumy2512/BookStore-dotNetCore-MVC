@@ -1,0 +1,33 @@
+﻿<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+@{Layout = null;}
+<div class="container">
+    <h1>Login</h1>
+
+    <form asp-action="Login">
+        <div class="form-group">
+            <label class="control-label">User Name</label>
+            <input name="na" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="pa" class="control-label">User Password</label>
+            <input name="pa" type="password" class="form-control" /> <br />
+        </div>
+        <input type="submit" value="Login" class="btn btn-primary" />
+
+        <p style="color:red"> @ViewData["message"]</p>
+    </form>
+    <a class="btn btn-dark" asp-action="Create">Create Account</a>
+
+</div>
+
+
